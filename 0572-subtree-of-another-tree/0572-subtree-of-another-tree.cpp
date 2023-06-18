@@ -15,7 +15,7 @@ public:
         if(root==NULL && subroot == NULL){
             return true;
         }
-        else if(root==NULL && subroot!=NULL || root!=NULL && subroot==NULL){
+        else if((root==NULL && subroot!=NULL )|| (root!=NULL && subroot==NULL)){
             return false;
         }
         if(root->val==subroot->val){
