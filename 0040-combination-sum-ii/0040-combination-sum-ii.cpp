@@ -11,11 +11,9 @@ void combination(vector<int>& candidates, int target, int sum, vector<int> candi
         if (i > l && candidates[i] == candidates[i - 1]) {
             continue;
         }
-        
-        if (sum + candidates[i] > target) {
+        if(sum+candidates[i]>target){
             break;
         }
-        
         sum += candidates[i];
         candi.push_back(candidates[i]);
         combination(candidates, target, sum, candi, i + 1);
