@@ -2,22 +2,28 @@ class Solution {
 public:
     int numMusicPlaylists(int n, int goal, int k) {
         const int MOD = 1e9 + 7;
+        vector dp(goal + 1, vector<long>(n + 1, -1));
 
-        // Initialize the DP table
-        vector<vector<long>> dp(goal + 1, vector<long>(n + 1, 0));
-        dp[0][0] = 1;
-
-        for (int i = 1; i <= goal; i++) {
-            for (int j = 1; j <= min(i, n); j++) {
-                // The i-th song is a new song
-                dp[i][j] = dp[i - 1][j - 1] * (n - j + 1) % MOD;
-                // The i-th song is a song we have played before
-                if (j > k) {
-                    dp[i][j] = (dp[i][j] + dp[i - 1][j] * (j - k)) % MOD;
-                }
+        function<long(int, int)> numberOfPlaylists = [&](int i, int j) -> long {
+            // Base cases
+            if (i == 0 && j == 0) {
+                return 1LL;
             }
-        }
+            if (i == 0 || j == 0) {
+                return 0LL;
+            }
+            if (dp[i][j] != -1) {
+                return dp[i][j];
+            }
+            // DP transition: add a new song or replay an old one
+            dp[i][j] = (numberOfPlaylists(i - 1, j - 1) * (n - j + 1)) % MOD;
+            if (j > k) {
+                dp[i][j] += (numberOfPlaylists(i - 1, j) * (j - k)) % MOD;
+                dp[i][j] %= MOD;
+            }
+            return dp[i][j];
+        };
 
-        return dp[goal][n];
+        return numberOfPlaylists(goal, n);
     }
 };
