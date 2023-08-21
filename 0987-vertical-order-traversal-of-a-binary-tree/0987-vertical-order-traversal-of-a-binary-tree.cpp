@@ -1,11 +1,5 @@
 class Solution {
 public:
-    
-	Solution() {
-		ios_base::sync_with_stdio(false);
-		cin.tie(nullptr);
-		cout.tie(nullptr);
-	}
 	
     void preOrder(TreeNode * root, int level, int horiDist, map<int, vector<pair<int, int>>>& _map) {
         if(root == nullptr) return;
