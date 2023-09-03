@@ -7,7 +7,7 @@ public:
         return subs;
     }
 private:
-    void subsets(vector<int>& nums, int i, vector<int>& sub, vector<vector<int>>& subs) {
+    void subsets(vector<int>& nums, int i, vector<int> sub, vector<vector<int>>& subs) {
         subs.push_back(sub);
         for (int j = i; j < nums.size(); j++) {
             sub.push_back(nums[j]);
