@@ -9,7 +9,8 @@ void function(vector<int>& candidates,int target,int index)
     if(sum>target)return ;//base case if sum is greater then target then return 
     
     if(sum==target){
-        result.push_back(current);//id sum is equal to target then just add current to result
+        result.push_back(current);
+        return;//id sum is equal to target then just add current to result
     }
     for(int i=index;i<candidates.size();i++){
         sum+=candidates[i];//and current value to sum
